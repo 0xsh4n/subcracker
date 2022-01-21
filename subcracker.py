@@ -1,5 +1,4 @@
 import requests
-
 def banner():
     ban=open("banner.txt","r")
     banne=ban.read()
@@ -18,8 +17,7 @@ for i in subdomains:
     try:
         r=requests.get(url2)
         if r.status_code!=404 and len(r.text)>0:
-            print(i)
+            print(i+'.'+url)
+
     except:
         pass
-
-
