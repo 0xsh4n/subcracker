@@ -2,11 +2,10 @@
 A subdomain Lister / Bruteforcer
 
 A simple tool to bruteforce Subdomains of a website.
-
-Usage:
 <img src="https://github.com/mr-sh4n/subcracker/blob/main/assets/subcracker.jpg">
-v1.0
 
+v1.0
+Usage:
 Nothing just enter the domain.
 
 Installing :
