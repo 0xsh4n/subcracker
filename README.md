@@ -9,7 +9,7 @@ A simple tool to bruteforce Subdomains of a website.
 \n
 
 Usage:
-\n
+
 Nothing just enter the domain.
 
 Installing :
