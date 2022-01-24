@@ -18,6 +18,5 @@ for i in subdomains:
         r=requests.get(url2)
         if r.status_code!=404 and len(r.text)>0:
             print(i+'.'+url)
-
     except:
         pass
