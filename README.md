@@ -4,6 +4,8 @@ A subdomain Lister / Bruteforcer
 A simple tool to bruteforce Subdomains of a website.
 
 Usage:
+<img src="https://github.com/mr-sh4n/subcracker/assets/subcracker.jpg">
+v1.0
 
 Nothing just enter the domain.
 
