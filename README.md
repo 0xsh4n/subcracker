@@ -16,6 +16,6 @@ Installing :
 
 ```cd subcracker```
 
-```bash install.sh```
+```sudo bash install.sh```
 
 ```python3 subcracker.py```
