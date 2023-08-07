@@ -45,18 +45,18 @@ def test_subdomains(url, subdomains):
         available, status_code = is_subdomain_available(url_with_subdomain)
         if available:
             found_subdomains.append(subdomain)
-            print(f"({idx}/{len(subdomains)}) Found: {subdomain}.{fixed_url} (Status Code: {status_code})")
+            print(f"{white} ({green}{idx}/{len(subdomains)}{white}) [{green}+{white}] {green}Subdomain found : {subdomain}.{fixed_url} {white}({green}Status Code : {status_code}{white})")
         else:
-            print(f"({idx}/{len(subdomains)}) Wrong Subdomain: {subdomain}.{fixed_url} (Status Code: {status_code})")
+            print(f"{white} ({red}{idx}/{len(subdomains)}{white}) {white}[{red}+{white}] {red}Wrong Subdomain : {subdomain}.{fixed_url} {white}({red}Status Code : {status_code}{white})")
 
     return found_subdomains
 
 def main():
     print_banner()
 
-    url = input("Enter the URL (with scheme): ")
+    url = input(f"{white} [{green}+{white}] {green}Enter the URL {white}({green}example : https://example.com{white}) : {green}")
 
-    subdomain_file = input("Enter your subdomain file name (press Enter for default 'subdomains.txt'): ").strip()
+    subdomain_file = input(f"{white} [{green}+{white}] {green}Enter your subdomain file name {white}({green}press Enter for default 'subdomains.txt'{white}) :{green} ").strip()
     if not subdomain_file:
         subdomain_file = "subdomains.txt"
 
@@ -66,16 +66,16 @@ def main():
     if is_subdomain_available(url):
         found_subdomains = test_subdomains(url, subdomains)
         if not found_subdomains:
-            print("No subdomains found")
+            print(f"{white} [{red}+{white}] {red}No subdomains found")
         else:
-            print("Found subdomains:")
+            print(f"{white} [{green}+{white}] {green}Found subdomains : ")
             for subdomain in found_subdomains:
                 print(subdomain)
     else:
-        print("URL not found:", url)
+        print(f"{white} [{red}+{white}] {red}URL not found : ", url)
 
 if __name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:
-        print("\nProgram interrupted by user.")
+        print(f"\n{white} [{red}+{white}] {red}Program interrupted by user.")
