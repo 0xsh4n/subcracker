@@ -1,10 +1,24 @@
 import requests
 
-def banner():
-    with open("banner.txt", "r") as ban:
-        banne = ban.read()
-        print(banne)
-        print("This program is made by mr-shan")
+green = "\033[92m"
+red = "\033[91m"
+white = "\033[97m"
+reset = "\033[0m"
+cyan = "\033[36m"
+
+def print_banner():
+    banner = f"""
+ {white}+------------------------------------------------------------------------------------+
+ {white}|{green} ███████╗██╗   ██╗██████╗  ██████╗██████╗  █████╗  ██████╗██╗  ██╗███████╗ ██████╗  {white}|
+ {white}|{green} ██╔════╝██║   ██║██╔══██╗██╔════╝██╔══██╗██╔══██╗██╔════╝██║ ██╔╝██╔════╝ ██╔══██╗ {white}|
+ {white}|{green} ███████╗██║   ██║██████╔╝██║     ██████╔╝███████║██║     █████╔╝ █████╗   ██████╔╝ {white}|
+ {white}|{green} ╚════██║██║   ██║██╔══██╗██║     ██╔══██╗██╔══██║██║     ██╔═██╗ ██╔══╝   ██╔══██╗ {white}|
+ {white}|{green} ███████║╚██████╔╝██████╔╝╚██████╗██║  ██║██║  ██║╚██████╗██║  ██╗███████╗ ██║  ██║ {white}|
+ {white}|{green} ╚══════╝ ╚═════╝ ╚═════╝  ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝ ╚═╝  ╚═╝ {white}|
+ {white}+------------------------------------{red}<{cyan}@mr-sh4n{red}>{white}--------------------------------------+{reset}"""
+    print(banner)
+
+
 
 def is_subdomain_available(subdomain_url):
     try:
@@ -22,12 +36,12 @@ def fix_url(url):
     return url
 
 def test_subdomains(url, subdomains):
-    tried_subdomains = []  # Store all tried subdomains
-    found_subdomains = []  # Store all found subdomains
-    fixed_url = fix_url(url)  # Fix the base URL
+    tried_subdomains = []
+    found_subdomains = []
+    fixed_url = fix_url(url)
     for idx, subdomain in enumerate(subdomains, start=1):
         url_with_subdomain = f"https://{subdomain}.{fixed_url}"
-        tried_subdomains.append(url_with_subdomain)  # Add the tried subdomain
+        tried_subdomains.append(url_with_subdomain)
         available, status_code = is_subdomain_available(url_with_subdomain)
         if available:
             found_subdomains.append(subdomain)
@@ -38,7 +52,7 @@ def test_subdomains(url, subdomains):
     return found_subdomains
 
 def main():
-    banner()
+    print_banner()
 
     url = input("Enter the URL (with scheme): ")
 
