@@ -10,14 +10,24 @@ Usage:
 
 Nothing just enter the domain.
 
-Installing :
+## INSTALLATION
 
-```git clone https://github.com/mr-sh4n/subcracker```
-
-```cd subcracker```
-
-```sudo bash install.sh```
-
-```python3 subcracker.py```
+1. Clone the subcracker repository:
+```
+git clone https://github.com/mr-sh4n/subcracker
+```
+2. Navigate to the cloned directory:
+```
+cd subcracker
+```
+3. Run the installation script:
+```
+sudo bash install.sh
+```
 
 <i>Termux users do not need root access, so do not type `sudo`</i>
+
+4. Start subcracker:
+```
+python3 subcracker.py
+```
