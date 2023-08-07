@@ -22,12 +22,12 @@ def fix_url(url):
     return url
 
 def test_subdomains(url, subdomains):
-    tried_subdomains = []  # Store all tried subdomains
-    found_subdomains = []  # Store all found subdomains
-    fixed_url = fix_url(url)  # Fix the base URL
+    tried_subdomains = []  
+    found_subdomains = []  
+    fixed_url = fix_url(url)  
     for idx, subdomain in enumerate(subdomains, start=1):
         url_with_subdomain = f"https://{subdomain}.{fixed_url}"
-        tried_subdomains.append(url_with_subdomain)  # Add the tried subdomain
+        tried_subdomains.append(url_with_subdomain)  
         if is_subdomain_available(url_with_subdomain):
             found_subdomains.append(subdomain)
             print(f"({idx}/{len(subdomains)}) Found: {subdomain}.{fixed_url}")
