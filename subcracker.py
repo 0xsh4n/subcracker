@@ -10,9 +10,9 @@ def is_subdomain_available(subdomain_url):
     try:
         r = requests.get(subdomain_url)
         r.raise_for_status()
-        return True
+        return True, r.status_code
     except requests.RequestException as e:
-        return False
+        return False, None
 
 def fix_url(url):
     if url.startswith("http://"):
@@ -22,17 +22,18 @@ def fix_url(url):
     return url
 
 def test_subdomains(url, subdomains):
-    tried_subdomains = []  
-    found_subdomains = []  
-    fixed_url = fix_url(url)  
+    tried_subdomains = []  # Store all tried subdomains
+    found_subdomains = []  # Store all found subdomains
+    fixed_url = fix_url(url)  # Fix the base URL
     for idx, subdomain in enumerate(subdomains, start=1):
         url_with_subdomain = f"https://{subdomain}.{fixed_url}"
-        tried_subdomains.append(url_with_subdomain)  
-        if is_subdomain_available(url_with_subdomain):
+        tried_subdomains.append(url_with_subdomain)  # Add the tried subdomain
+        available, status_code = is_subdomain_available(url_with_subdomain)
+        if available:
             found_subdomains.append(subdomain)
-            print(f"({idx}/{len(subdomains)}) Found: {subdomain}.{fixed_url}")
+            print(f"({idx}/{len(subdomains)}) Found: {subdomain}.{fixed_url} (Status Code: {status_code})")
         else:
-            print(f"({idx}/{len(subdomains)}) Wrong Subdomain: {subdomain}.{fixed_url}")
+            print(f"({idx}/{len(subdomains)}) Wrong Subdomain: {subdomain}.{fixed_url} (Status Code: {status_code})")
 
     return found_subdomains
 
