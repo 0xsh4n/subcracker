@@ -19,3 +19,5 @@ Installing :
 ```sudo bash install.sh```
 
 ```python3 subcracker.py```
+
+<i>Termux users do not need root access, so do not type `sudo`</i>
