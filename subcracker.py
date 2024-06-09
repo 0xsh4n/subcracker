@@ -10,6 +10,7 @@
 ############################################################################
 
 import requests
+from validlink import check_url_validity
 
 green = "\033[92m"
 red = "\033[91m"
@@ -66,6 +67,12 @@ def main():
     print_banner()
 
     url = input(f"{white} [{green}+{white}] {green}Enter the URL {white}({green}example : https://example.com{white}) : {green}")
+    is_valid = check_url_validity(url)
+    if is_valid:
+        pass
+    else:
+        print(f"The URL {url} is not valid.")
+        exit()
 
     subdomain_file = input(f"{white} [{green}+{white}] {green}Enter your subdomain file name {white}({green}press Enter for default 'subdomains.txt'{white}) :{green} ").strip()
     if not subdomain_file:
