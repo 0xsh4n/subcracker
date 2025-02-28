@@ -1,16 +1,16 @@
 # SubCracker
 
-Enterprise-Grade Subdomain Reconnaissance Tool for Bug Hunters and Security Professionals
+Advanced Subdomain Reconnaissance Tool for Bug Hunters and Security Researchers
 
 <p align="center">
   <img src="https://img.shields.io/badge/Version-2.5-blue.svg" alt="Version 2.5">
   <img src="https://img.shields.io/badge/Python-3.7+-green.svg" alt="Python 3.7+">
-  <img src="https://img.shields.io/badge/License-Commercial-red.svg" alt="License">
+  <img src="https://img.shields.io/badge/License-MIT-red.svg" alt="License">
 </p>
 
 ## Overview
 
-SubCracker is a powerful, enterprise-grade subdomain reconnaissance tool designed for professional bug hunters and security researchers. It combines comprehensive discovery techniques with advanced analysis capabilities to identify and evaluate subdomains for security vulnerabilities.
+SubCracker is a powerful subdomain reconnaissance tool designed for bug hunters and security researchers. It combines comprehensive discovery techniques with advanced analysis capabilities to identify and evaluate subdomains for security vulnerabilities.
 
 ## Features
 
@@ -21,7 +21,7 @@ SubCracker is a powerful, enterprise-grade subdomain reconnaissance tool designe
 - **Advanced DNS Analysis**: Comprehensive DNS record inspection and validation
 - **Port Scanning Integration**: Discover open ports on identified subdomains
 - **Multiple Output Formats**: Export results in JSON, CSV, and plaintext for further analysis
-- **Interactive HTML Reports**: Generate visual reports with charts and statistics
+- **HTML Reports**: Generate visual reports with charts and statistics
 - **Comprehensive Subdomain Analysis**: Get detailed information on each discovered subdomain
 
 ## Requirements
@@ -43,17 +43,17 @@ git clone https://github.com/0xsh4n/subcracker.git
 cd subcracker
 
 # Install required dependencies
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 ## Quick Start
 
 ```bash
 # Basic usage
-python subcracker.py -u example.com -w subdomains.txt
+python3 subcracker.py -u example.com -w subdomains.txt
 
 # Advanced usage with multiple features
-python subcracker.py -u example.com -w subdomains.txt -t 100 --check-takeover --crawl --report
+python3 subcracker.py -u example.com -w subdomains.txt -t 100 --check-takeover --crawl --report
 ```
 
 ## Command Line Options
@@ -90,7 +90,7 @@ The website crawling engine intelligently extracts potential subdomain names fro
 To use this feature:
 
 ```bash
-python subcracker.py -u example.com --crawl --crawl-depth 3
+python3 subcracker.py -u example.com --crawl --crawl-depth 3
 ```
 
 The generated wordlist is automatically used in the current scan and saved for future use.
@@ -102,7 +102,7 @@ SubCracker generates several output files in the specified output directory:
 - `<domain>_<timestamp>_subdomains.txt`: Simple list of discovered subdomains
 - `<domain>_<timestamp>_detailed.json`: Detailed JSON output with all subdomain information
 - `<domain>_<timestamp>_results.csv`: CSV format results for spreadsheet analysis
-- `<domain>_<timestamp>_report.html`: Interactive HTML report with visualizations (when `--report` is used)
+- `<domain>_<timestamp>_report.html`: HTML report with visualizations (when `--report` is used)
 - `subdomain_<domain>.txt`: Custom wordlist generated from website crawling (when `--crawl` is used)
 
 ## Example Scenarios
@@ -110,7 +110,7 @@ SubCracker generates several output files in the specified output directory:
 ### Bug Bounty Reconnaissance
 
 ```bash
-python subcracker.py -u target-company.com --crawl --check-takeover -t 100 --report
+python3 subcracker.py -u target-company.com --crawl --check-takeover -t 100 --report
 ```
 
 This command will crawl the website, check for subdomain takeover vulnerabilities, use 100 concurrent threads, and generate a comprehensive HTML report.
@@ -118,7 +118,7 @@ This command will crawl the website, check for subdomain takeover vulnerabilitie
 ### Creating a Custom Wordlist from Target
 
 ```bash
-python subcracker.py -u target-company.com --crawl --crawl-depth 4 --max-crawl-urls 2000 -o custom_wordlists
+python3 subcracker.py -u target-company.com --crawl --crawl-depth 4 --max-crawl-urls 2000 -o custom_wordlists
 ```
 
 This focuses on thorough website crawling to generate a comprehensive custom wordlist without performing a full scan.
@@ -126,16 +126,11 @@ This focuses on thorough website crawling to generate a comprehensive custom wor
 ### Comprehensive Scan with Multiple Wordlists
 
 ```bash
-python subcracker.py -u target-company.com -w common_subdomains.txt technology_subdomains.txt --crawl --check-takeover --ports 80,443,8080,8443,3000,3001,5000,8000,8888 --report
+python3 subcracker.py -u target-company.com -w common_subdomains.txt technology_subdomains.txt --crawl --check-takeover --ports 80,443,8080,8443,3000,3001,5000,8000,8888 --report
 ```
 
 This combines multiple wordlists with website crawling, takeover checks, and extended port scanning for a thorough assessment.
 
-## License
-
-Commercial license. Copyright © 2025 SubCracker. All rights reserved.
-For licensing inquiries, contact: licensing@subcracker.pro
-
 ## Disclaimer
 
-This tool is intended for use by security professionals with proper authorization. Always ensure you have permission to scan the target domain. Unauthorized scanning may violate laws and regulations.
+This tool is intended for security research with proper authorization. Always ensure you have permission to scan the target domain. Unauthorized scanning may violate laws and regulations.
