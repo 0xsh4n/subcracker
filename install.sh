@@ -1,71 +1,107 @@
 #!/bin/bash
 
-############################################################################
-#          Copyright (c) 2023 GH05T-HUNTER5. All rights reserved.          #
-# If you want a useful project like this contact us : mrhunter5@proton.me  #
-#      You can also create similar projects in collaboration with us       #
-#                          Invite : GH05T-HUNTER5                          #
-#   This code is copyrighted and may not be copied or edited without the   #
-#            express written permission of the copyright holder.           #
-############################################################################
+# SubCracker Installation Script
+# https://github.com/0xsh4n/subcracker
 
-green="\033[92m"
-red="\033[91m"
-white="\033[97m"
-reset="\033[0m"
-cyan="\033[36m"
+echo "===================================================="
+echo "    SubCracker - Subdomain Reconnaissance Tool"
+echo "===================================================="
+echo "Starting installation process..."
 
-echo -e "${white}+-----------------------------------------------+"
-echo -e "${white}| ${green}Please wait for the base package installation ${white}|"
-echo -e "${white}+-----------------------------------------------+"
+# Check if Python 3.7+ is installed
+python_version=$(python3 --version 2>&1 | awk '{print $2}')
+if [[ -z "$python_version" ]]; then
+    echo "[ERROR] Python 3 is not installed or not in PATH."
+    echo "Please install Python 3.7+ and try again."
+    exit 1
+fi
 
-install() {
-    if command -v python3 &>/dev/null; then
-        echo "Python package is already installed."
+major=$(echo $python_version | cut -d. -f1)
+minor=$(echo $python_version | cut -d. -f2)
+
+if [[ $major -lt 3 || ($major -eq 3 && $minor -lt 7) ]]; then
+    echo "[ERROR] Python 3.7+ is required. Current version: $python_version"
+    echo "Please upgrade Python and try again."
+    exit 1
+fi
+
+echo "[✓] Python $python_version detected."
+
+# Create virtual environment
+echo "Creating virtual environment..."
+python3 -m venv venv
+if [ $? -ne 0 ]; then
+    echo "[ERROR] Failed to create virtual environment."
+    echo "Please install python3-venv package and try again."
+    exit 1
+fi
+echo "[✓] Virtual environment created."
+
+# Activate virtual environment
+echo "Activating virtual environment..."
+source venv/bin/activate
+if [ $? -ne 0 ]; then
+    echo "[ERROR] Failed to activate virtual environment."
+    exit 1
+fi
+echo "[✓] Virtual environment activated."
+
+# Upgrade pip
+echo "Upgrading pip..."
+pip install --upgrade pip
+if [ $? -ne 0 ]; then
+    echo "[WARNING] Failed to upgrade pip. Continuing with installation..."
+fi
+
+# Install dependencies
+echo "Installing dependencies..."
+pip install -r requirements.txt
+if [ $? -ne 0 ]; then
+    echo "[ERROR] Failed to install dependencies."
+    exit 1
+fi
+echo "[✓] Dependencies installed successfully."
+
+# Create default directories
+echo "Creating default directories..."
+mkdir -p output
+mkdir -p wordlists
+if [ ! -f "wordlists/subdomains.txt" ]; then
+    echo "Downloading default subdomain wordlist..."
+    curl -s https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/DNS/subdomains-top1million-5000.txt -o wordlists/subdomains.txt
+    if [ $? -ne 0 ]; then
+        echo "[WARNING] Failed to download default wordlist. You'll need to provide your own."
     else
-        echo "Please install the Python3 package."
-        exit 1
+        echo "[✓] Default wordlist downloaded."
     fi
+fi
 
-    if ! command -v pip3 &>/dev/null; then
-        echo "Pip3 is not installed. Installing pip3..."
-        sudo apt-get install python3-pip -y
+# Make the script executable
+chmod +x subcracker.py
+
+# Create a symlink for easier access
+if [ -f "subcracker.py" ]; then
+    ln -sf $(pwd)/subcracker.py venv/bin/subcracker 2>/dev/null
+    if [ $? -eq 0 ]; then
+        echo "[✓] Created symlink for subcracker command."
     fi
+fi
 
-    if ! command -v requests &>/dev/null; then
-        echo "Requests package not found. Installing requests..."
-        if ! pip3 install requests; then
-            echo "Failed to install requests package."
-            exit 1
-        fi
-        echo "Requests package installed successfully."
-    else
-        echo "Requests package is already installed."
-    fi
-
-    if ! command -v validlink &>/dev/null; then
-        echo "Validlink package not found. Installing validlink..."
-        if ! pip3 install validlink; then
-            echo "Failed to install validlink package."
-            exit 1
-        fi
-        echo "Validlink package installed successfully."
-    else
-        echo "Validlink package is already installed."
-    fi
-}
-
-install
-
-wget https://gh05t-hunter5.github.io/the-source/Readers/requirements.sh && bash requirements.sh && rm -rf requirements.sh
-clear
-echo -e "${white}+-----------------------------------------------+"
-echo -e "${white}| ${green}Please wait for the base package installation ${white}|"
-echo -e "${white}+-----------------------------------------------+"
-
-mypass -l 8 1000 subdomains.txt
-clear
-
-echo -e "${white}+-----------------------------------------------+"
-echo -e "${white}|      ${green}Base packages installed successfully     ${white}|"
-echo -e "${white}+-----------------------------------------------+"
+# Installation complete
+echo ""
+echo "===================================================="
+echo "    SubCracker Installation Complete!"
+echo "===================================================="
+echo ""
+echo "To use SubCracker:"
+echo "1. Activate the virtual environment:"
+echo "   source venv/bin/activate"
+echo ""
+echo "2. Run SubCracker:"
+echo "   python subcracker.py -u example.com -w wordlists/subdomains.txt"
+echo ""
+echo "For more options, run:"
+echo "   python subcracker.py --help"
+echo ""
+echo "Thank you for installing SubCracker!"
+echo "===================================================="
