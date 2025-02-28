@@ -41,7 +41,8 @@ SubCracker is a powerful subdomain reconnaissance tool designed for bug hunters 
 # Clone the repository
 git clone https://github.com/0xsh4n/subcracker.git
 cd subcracker
-
+chmod +x setup.sh
+./setup.sh
 # Install required dependencies
 pip install -r requirements.txt
 ```
