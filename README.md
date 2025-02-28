@@ -43,7 +43,7 @@ git clone https://github.com/0xsh4n/subcracker.git
 cd subcracker
 
 # Install required dependencies
-pip3 install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 ## Quick Start
@@ -130,6 +130,24 @@ python3 subcracker.py -u target-company.com -w common_subdomains.txt technology_
 ```
 
 This combines multiple wordlists with website crawling, takeover checks, and extended port scanning for a thorough assessment.
+
+## Contributing
+
+Contributions to SubCracker are welcome! If you'd like to contribute:
+
+1. Fork the repository
+2. Create a new branch (`git checkout -b feature-branch`)
+3. Make your changes
+4. Test thoroughly
+5. Commit your changes (`git commit -am 'Add new feature'`)
+6. Push to the branch (`git push origin feature-branch`)
+7. Create a new Pull Request
+
+Please follow the existing code style and include appropriate documentation and tests for new features.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Disclaimer
 
