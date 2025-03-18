@@ -6,5 +6,4 @@ python-whois>=0.7.3
 tldextract>=3.4.0
 urllib3>=1.26.12
 argparse>=1.4.0
-logging>=0.5.1
 colorama>=0.4.6
